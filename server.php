@@ -1,5 +1,5 @@
 <?php
-	
+
 	//function to set headers depending upon filepath
 	function set_headers($filepath){
 		if(file_exists($filepath)){
@@ -23,20 +23,22 @@
 	set_time_limit(10);
 
 	//specify address and port on which the server listens
-	$address = "127.0.0.1";	
+	$address = "127.0.0.1";
 	$port = 1337;
 
 	//create a socket and bind it to localhost
 	$sock = socket_create(AF_INET,SOCK_STREAM,SOL_TCP);
 	socket_bind($sock,$address,$port);
-	
+
 	//start listening for connections
 	socket_listen($sock);
-	
+
+	echo "Server started on $address listening on $port";
+
 	while(true){
 
 		//accept connections from client
-		$client = socket_accept($sock);	
+		$client = socket_accept($sock);
 		$msg = "welcome to this basic server...\nto quit, just type quit.\n";
 		socket_write($client, $msg);
 
@@ -88,7 +90,7 @@
 			}
 
 		}
-		
+
 		//close connection with current client
 		socket_close($client);
 
